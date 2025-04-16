@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fascinate+Inline&display=swap');
+
+@import "tailwindcss";
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: #000;
+  font-family: 'Lato', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+@layer base {
+  .fascinate-font {
+    font-family: "Fascinate Inline", system-ui;
+    font-weight: 600;
+    font-style: normal;
+  }
+
+  .hero-shape {
+    margin: 0 auto;
+    border: 1px solid #00000082;
+    border-bottom: 0;
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+    -webkit-mask-image: radial-gradient(110% 20% at bottom, transparent 50%, #fff 51%);
+    mask-image: radial-gradient(110% 20% at bottom, transparent 50%, #fff 51%);
+  }
+
+
+  .hero-shape::after {
+    content: "";
+    position: absolute;
+    bottom: -150px;
+    right: -10%;
+    left: -10%;
+    height: 200px;
+    border-radius: 50%;
+    z-index: 2;
+  }
+
+  .animate-movies {
+    animation: scroll-left 5s linear infinite;
+    -moz-animation: scroll-left 5s linear infinite;
+    -webkit-animation: scroll-left 100s linear infinite;
+  }
+
+
+  @keyframes scroll-left {
+    0% {
+      transform: translateX(0%);
+      -webkit-transform: translateX(0%);
+      transform: translateX(0%);
+    }
+
+    100% {
+      transform: translateX(-300%);
+      -moz-transform: translateX(-300%);
+      -webkit-transform: translateX(-300%);
+    }
+
+  }
+}
