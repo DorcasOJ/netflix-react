@@ -32,7 +32,7 @@ body {
 
   .hero-shape {
     margin: 0 auto;
-    border: 1px solid #00000082;
+    /* border: 1px solid #00000082; */
     border-bottom: 0;
     border-radius: 20px;
     position: relative;
@@ -54,9 +54,17 @@ body {
   }
 
   .animate-movies {
-    animation: scroll-left 5s linear infinite;
-    -moz-animation: scroll-left 5s linear infinite;
-    -webkit-animation: scroll-left 100s linear infinite;
+    animation: scroll-left 100s linear infinite;
+
+    /* -moz-animation: scroll-left 100s linear infinite; */
+    /* -webkit-animation: scroll-left 100s linear infinite; */
+
+  }
+
+  .animate-movies-paused {
+    animation-play-state: paused;
+    -moz-animation-play-state: paused;
+    -webkit-animation-play-state: paused;
   }
 
 

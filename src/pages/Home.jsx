@@ -16,7 +16,7 @@ const Home = () => {
       <Row title="Anime" fetchURL={requests.requestAnime} />
 
       <Row title="Drama" fetchURL={requests.requestDrama} />
-      <Row title="Movie" fetchURL={requests.requestLocal2} />
+      <Row title="Movie" fetchURL={requests.requestTrending} />
       <Row title="African" fetchURL={requests.requestAfrican} />
       <Row title="America" fetchURL={requests.requestAmerican} />
     </>

@@ -1,14 +1,15 @@
 import React from "react";
 
-const WelcomeMovies = ({ item, id, hero }) => {
+const WelcomeMovies = ({ item, id, hero, pauseAnimation }) => {
   return (
     <div
-      className={`inline-block cursor-pointer p-4 relative ${
+      className={`inline-block cursor-pointer relative ${
         !hero
-          ? "w-[170px] sm:w-[200px] md:w-[230px] lg:w-[260px] h-[350px]"
-          : "w-[170px] h-[255px] animate-movies"
+          ? "w-[170px] sm:w-[200px] md:w-[230px] lg:w-[260px] h-[350px] p-5"
+          : "w-[160px] h-[255px] animate-movies p-1"
       }`}
       key={id}
+      style={{ animationPlayState: pauseAnimation ? "paused" : "running" }}
     >
       {!hero && (
         <span className="absolute fascinate-font text-7xl text-red-100 left-[-5px] ">
