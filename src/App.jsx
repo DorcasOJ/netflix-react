@@ -14,9 +14,9 @@ function App() {
       <AuthContextProvider>
         <Navbar />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<IntroToSignup />} />
+          <Route path="/home" element={<Home />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/welcome" element={<IntroToSignup />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/account" element={<Account />} />
         </Routes>
