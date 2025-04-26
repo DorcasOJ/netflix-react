@@ -1,32 +1,51 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { UserAuth } from "../context/AuthContent";
+import PasswordInput from "../components/PasswordInput";
+import { RegContext } from "../context/RegContext";
 
 const Signup = () => {
-  const [email, setEmail] = useState("");
+  const [emailForm, setEmailForm] = useState("");
   const [password, setPassword] = useState("");
   const [buttonDisabled, setButtonDisabled] = useState(false);
-  const [error, setError] = useState("");
-  const { user, signUp } = UserAuth();
+  const [errorSignup, setErrorSignup] = useState("");
+  const [fullName, setFullName] = useState("");
+  const { user, signUp, error } = UserAuth();
+  const { setEmail } = useContext(RegContext);
+  const params = useParams();
   const navigate = useNavigate();
+
+  // console.log(user);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setButtonDisabled(true);
-    setError("");
+    setErrorSignup("");
     try {
-      await signUp(email, password);
-      navigate("/");
+      await signUp(emailForm, password, fullName);
+
+      setEmail(emailForm);
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       if (String(error).includes("email-already-in-use")) {
-        setError("Email already in use, signIn instead");
+        setErrorSignup("Email already in use, signIn instead");
       } else {
-        setError(error.message);
+        setErrorSignup(error.message);
       }
       setButtonDisabled(false);
     }
   };
+
+  useEffect(() => {
+    if (user?.email) {
+      navigate("/registration");
+    }
+
+    if (error) {
+      setErrorSignup(`${error.code}`);
+      setButtonDisabled(false);
+    }
+  }, [user, error]);
 
   return (
     <>
@@ -43,28 +62,42 @@ const Signup = () => {
           <div className="max-w[450px] h-[600px] mx-auto bg-black/75 text-white">
             <div className="max-w-[320px] mx-auto py-16">
               <h1 className="text-3xl font-bold"> Sign up</h1>
-              {error && (
-                <p className="p-3 bg-red-400 my-2 text-center">{error}</p>
+              {errorSignup && (
+                <p className="p-3 bg-red-400 my-2 text-center">{errorSignup}</p>
               )}
               <form
                 onSubmit={handleSubmit}
                 className="w-full flex flex-col py-4"
               >
                 <input
-                  type="email"
-                  placeholder="Email"
-                  autoComplete="email"
-                  className="p-3 my-2 bg-gray-700 rounded"
-                  onChange={(e) => setEmail(e.target.value)}
+                  type="text"
+                  placeholder="Full Name"
+                  autoComplete="full name"
+                  className="border border-gray-300 rounded text-sm w-full mb-4 px-3 py-2 bg-transparent  focus:outline-none"
+                  onChange={(e) => setFullName(e.target.value)}
                 />
 
                 <input
+                  type="email"
+                  placeholder="Email"
+                  autoComplete="email"
+                  className="border border-gray-300 rounded text-sm w-full mb-4 px-3 py-2 bg-transparent = focus:outline-none"
+                  onChange={(e) => setEmailForm(e.target.value)}
+                  value={params?.email}
+                />
+
+                <PasswordInput
+                  setPassword={setPassword}
+                  placeholder="Password"
+                />
+
+                {/* <input
                   type="password"
                   placeholder="Password"
                   autoComplete="current-password"
                   className="p-3 my-2 bg-gray-700 rounded"
                   onChange={(e) => setPassword(e.target.value)}
-                />
+                /> */}
 
                 {buttonDisabled && (
                   <div className="my-3 flex items-center justify-center h-[50px]">
@@ -78,8 +111,10 @@ const Signup = () => {
 
                 <button
                   disabled={buttonDisabled}
-                  className={` py-3  rounded font-bold cursor-pointer ${
-                    buttonDisabled ? "bg-red-950 my-2" : "bg-red-600 my-6"
+                  className={` py-3  rounded font-bold  ${
+                    buttonDisabled
+                      ? "bg-red-950 my-2 cursor-not-allowed"
+                      : "bg-red-600 my-6 cursor-pointer"
                   }`}
                 >
                   Sign Up

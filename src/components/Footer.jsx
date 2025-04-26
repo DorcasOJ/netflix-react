@@ -3,7 +3,7 @@ import FooterList from "../utils/FooterList";
 
 const Footer = () => {
   return (
-    <div>
+    <div className="pt-8 px-8 z-30 ">
       <div className="md:grid md:grid-cols-3 md:.grid-rows-5 flex flex-col gap-2 pt-6">
         {FooterList.map((list, index) => (
           <div

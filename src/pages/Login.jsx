@@ -1,33 +1,48 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserAuth } from "../context/AuthContent";
+import PasswordInput from "../components/PasswordInput";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [buttonDisabled, setButtonDisabled] = useState(false);
-  const [error, setError] = useState("");
-  const { user, logIn } = UserAuth();
+  const [errorLogin, setErrorLogin] = useState("");
+  const { user, logIn, error } = UserAuth();
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setButtonDisabled(true);
-    setError("");
+    setErrorLogin("");
     try {
       await logIn(email, password);
-      navigate("/");
+
+      setButtonDisabled(false);
     } catch (error) {
       console.log(error);
       if (String(error).includes("invalid-credential")) {
-        setError("Invalid Email or Password");
+        setErrorLogin("Invalid Email or Password");
       } else {
-        setError(error.message);
+        setErrorLogin(error.message);
       }
       setButtonDisabled(false);
       // setTimeout(() => setButtonDisabled(false), 3000);
     }
   };
+
+  // console.log("error", error.code, user?.emil);
+
+  useEffect(() => {
+    if (user?.email) {
+      navigate("/home");
+    }
+
+    if (error) {
+      setErrorLogin(`${error.code}`);
+      setButtonDisabled(false);
+    }
+  }, [buttonDisabled]);
   return (
     <div className="w-full h-screen">
       <img
@@ -39,9 +54,9 @@ const Login = () => {
       <div className="fixed w-full px-4 py-24 z-50">
         <div className="max-w-[450px] h-[600px] mx-auto bg-black/75 text-white">
           <div className="max-w-[320px] mx-auto py-16">
-            <h1 className="text-3xl font-bold">Sign In</h1>
-            {error && (
-              <p className="p-3 bg-red-400 my-2 text-center">{error}</p>
+            <h1 className="text-3xl font-bold">Log In</h1>
+            {errorLogin && (
+              <p className="p-3 bg-red-400 my-2 text-center"> {errorLogin}</p>
             )}
             <form onSubmit={handleSubmit} className="w-full flex flex-col py-4">
               <input
@@ -49,16 +64,19 @@ const Login = () => {
                 placeholder="Email"
                 autoComplete="email"
                 onChange={(e) => setEmail(e.target.value)}
-                className="p-3 my-2 bg-gray-700 rounded"
+                className="border border-gray-300 rounded text-sm w-full mb-4 px-3 py-2 bg-transparent focus:outline-none"
               />
 
-              <input
+              {/* <input
                 type="password"
                 placeholder="Password"
                 autoComplete="current-password"
                 onChange={(e) => setPassword(e.target.value)}
                 className="p-3 my-2 bg-gray-700 rounded"
-              />
+              /> */}
+
+              <PasswordInput setPassword={setPassword} placeholder="Password" />
+
               {buttonDisabled && (
                 <div className="my-3 flex items-center justify-center h-[50px]">
                   <img
@@ -74,7 +92,7 @@ const Login = () => {
                   buttonDisabled ? "bg-red-950 my-2" : "bg-red-600 my-6"
                 }`}
               >
-                Sign In
+                LogIn
               </button>
               <div className="flex justify-between items-center text-sm text-gray-600">
                 <p>

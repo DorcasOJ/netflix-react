@@ -23,6 +23,10 @@ body {
   font-family: 'Lato', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+/* .registration {
+  background-color: #fff;
+} */
+
 @layer base {
   .fascinate-font {
     font-family: "Fascinate Inline", system-ui;
@@ -51,6 +55,12 @@ body {
     height: 200px;
     border-radius: 50%;
     z-index: 2;
+  }
+
+  .scroll-black {
+    scroll-behavior: smooth;
+    scrollbar-color: #686868 #000;
+
   }
 
   .animate-movies {

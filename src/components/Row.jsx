@@ -14,9 +14,13 @@ const Row = ({ title, fetchURL }) => {
     });
   }, [fetchURL]);
 
-  if (title === "Up Coming") {
-    console.log(movies);
-  }
+  // if (title === "Originals") {
+  //   console.log("Originals", movies);
+  // }
+
+  // if (title === "Popular") {
+  //   console.log(movies);
+  // }
 
   return (
     <>
