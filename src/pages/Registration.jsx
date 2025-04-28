@@ -87,8 +87,8 @@ const Registration = () => {
           {!emailExisting ? (
             <div className="flex flex-col items-center justify-center md:w-[70%] mx-auto w-[80%] ">
               <div className="flex py-4">
-                <img src="/public/monitor-2.svg" alt="" className="w-8" />
-                <img src="/public/speaker.svg" alt="" className="w-6" />
+                <img src="./monitor-2.svg" alt="" className="w-8" />
+                <img src="./speaker.svg" alt="" className="w-6" />
               </div>
               <div className="text-center">
                 <span className="text-[10px] text-gray-600">STEP 1 OF 3</span>
@@ -211,11 +211,7 @@ const Registration = () => {
           ) : (
             <div className="flex flex-col items-center justify-center w-[80%] mx-auto">
               <div className="flex py-4">
-                <img
-                  src="/public/check-circle-small.svg"
-                  alt=""
-                  className="w-15"
-                />
+                <img src="./check-circle-small.svg" alt="" className="w-15" />
               </div>
               <div className="text-center">
                 <span className="text-[10px] text-gray-600 py-1">
@@ -226,29 +222,17 @@ const Registration = () => {
                 </h4>
                 <ul className="list-none py-1 w-full flex flex-col gap-3 ">
                   <li className="text-xs leading-0">
-                    <img
-                      src="/public/check.svg"
-                      alt=""
-                      className="w-8 inline"
-                    />
+                    <img src="./check.svg" alt="" className="w-8 inline" />
                     <span>No commitments, cancel anytime</span>
                   </li>
                   <li className="text-xs leading-0">
-                    <img
-                      src="/public/check.svg"
-                      alt=""
-                      className="w-8 inline"
-                    />
+                    <img src="./check.svg" alt="" className="w-8 inline" />
                     <span className="text-left">
                       Everything on Netflix for one low price
                     </span>
                   </li>
                   <li className="text-xs leading-0">
-                    <img
-                      src="/public/check.svg"
-                      alt=""
-                      className="w-8 inline"
-                    />
+                    <img src="./check.svg" alt="" className="w-8 inline" />
                     <span>No ads and no extra fees. Ever</span>
                   </li>
                 </ul>
@@ -335,11 +319,7 @@ const Registration = () => {
         <div className="">
           <div className="flex flex-col items-center justify-center w-[80%] mx-auto">
             <div className="flex py-4">
-              <img
-                src="/public/padlock-round-arrow.svg"
-                alt=""
-                className="w-11"
-              />
+              <img src="./padlock-round-arrow.svg" alt="" className="w-11" />
             </div>
             <div className="text-center">
               <span className="text-[10px] text-gray-600 py-1">
@@ -504,11 +484,7 @@ const Registration = () => {
               <>
                 <p className="text-right">
                   <span className="text-xs pe-[2px]">End-to-end encrypted</span>
-                  <img
-                    src="/public/padlock.svg"
-                    alt=""
-                    className="w-3 inline "
-                  />
+                  <img src="./padlock.svg" alt="" className="w-3 inline " />
                 </p>
 
                 <div className="flex justify-between items-center border-2 rounded border-gray-300 px-2 py-1 w-full">

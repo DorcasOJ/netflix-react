@@ -330,7 +330,10 @@ const Play = () => {
                       <div>
                         <h1 className="text-white text-4xl font-semibold my-10 border-l-4 border-red-800 pl-3 ">
                           {" "}
-                          Recommendation{" "}
+                          Watch After{" "}
+                          {movieDetails.title ||
+                            movieDetails.name ||
+                            movieDetails.original_title}
                         </h1>
                         <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
                           {recommendations.map(

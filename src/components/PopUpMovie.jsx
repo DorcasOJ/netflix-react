@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { UserAuth } from "../context/AuthContent";
-import { Genre } from "../Request";
+import { Genre, imageURL } from "../Request";
 import axios from "axios";
 import { truncateString } from "../utils/helper";
 import { LiaTimesCircleSolid } from "react-icons/lia";
@@ -53,7 +53,7 @@ const PopUpMovie = ({ item, setItem }) => {
 
       <div className="w-full h-1/3 relative bg-[#ccc] rounded-t-lg ">
         <img
-          src={`https://image.tmdb.org/t/p/original/${item?.backdrop_path}`}
+          src={`${imageURL.lgUrl}${item?.backdrop_path}`}
           alt={item?.title ? item.title : item.name}
           className="w-full h-full rounded-t-lg object-cover"
           loading="lazy"

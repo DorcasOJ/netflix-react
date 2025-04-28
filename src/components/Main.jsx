@@ -9,16 +9,18 @@ import { Link, useNavigate } from "react-router-dom";
 import { ItemContext } from "../context/ItemContext";
 
 const Main = () => {
-  const [movies, setMovies] = useState([]);
+  const [movie, setMovie] = useState([]);
   const { user } = UserAuth();
   const { saveShow } = useContext(ItemContext);
   const navigate = useNavigate();
 
-  const movie = movies[Math.floor(Math.random() * movies.length)];
-
   useEffect(() => {
     axios.get(requests.requestPopular).then((response) => {
-      setMovies(response.data.results);
+      setMovie(
+        response.data.results[
+          Math.floor(Math.random() * response.data.results.length)
+        ]
+      );
     });
   }, []);
 
@@ -29,7 +31,7 @@ const Main = () => {
       <div className="w-full h-full">
         <div className="absolute w-full h-[550px] bg-gradient-to-r from-black"></div>
         <img
-          src={`${imageURL.url}${movie?.backdrop_path}`}
+          src={`${imageURL.lgUrl}${movie?.backdrop_path}`}
           alt={movie?.title}
           className="w-full h-full object-cover"
         />

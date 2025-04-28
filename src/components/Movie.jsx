@@ -36,7 +36,7 @@ const Movie = ({ item }) => {
             setShowPopUp(true);
           }}
         >
-          {item?.title}
+          {item?.title ? item.title : item.name}
         </p>
         <p
           onClick={() => {

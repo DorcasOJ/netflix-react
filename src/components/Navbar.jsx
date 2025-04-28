@@ -49,7 +49,7 @@ const Navbar = () => {
         <Link to="/home">
           <h1 className="text-red-600 cursor-pointer h-[35px] flex items-center">
             <img
-              src="/public/logo.png"
+              src="./logo.png"
               alt="NETFLIX"
               className="sm:h-full w-[50%] sm:w-full "
             />
@@ -83,7 +83,7 @@ const Navbar = () => {
                   <Link to="/account">
                     <button className="text-white cursor-pointer rounded-full bg-gradient-to-bl to-gray-800 p-2 hover:to-yellow-300 ">
                       <img
-                        src="/public/avater-blue.svg"
+                        src="./avater-blue.svg"
                         alt=""
                         className=" w-10  sm:w-8"
                       />

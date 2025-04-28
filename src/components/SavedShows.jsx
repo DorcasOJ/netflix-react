@@ -55,7 +55,6 @@ const SavedShows = () => {
                 className="absolute top-0 left-0 w-full h-full hover:bg-black/80 opacity-0 hover:opacity-100 text-white"
                 onClick={() => {
                   navigate(`/play/${item.id}/${item.img.slice(1)}`);
-
                   window.location.reload(true);
                 }}
               >
