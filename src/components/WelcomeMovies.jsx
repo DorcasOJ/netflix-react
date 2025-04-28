@@ -1,6 +1,8 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const WelcomeMovies = ({ item, id, hero, pauseAnimation }) => {
+  const navigate = useNavigate();
   return (
     <div
       className={`inline-block cursor-pointer relative ${
@@ -9,6 +11,10 @@ const WelcomeMovies = ({ item, id, hero, pauseAnimation }) => {
           : "w-[160px] h-[255px] animate-movies p-1"
       }`}
       style={{ animationPlayState: pauseAnimation ? "paused" : "running" }}
+      onClick={() => {
+        navigate("/login");
+        window.location.reload(true);
+      }}
     >
       {!hero && (
         <span className="absolute fascinate-font text-7xl  text-red-100 left-[-5px] ">

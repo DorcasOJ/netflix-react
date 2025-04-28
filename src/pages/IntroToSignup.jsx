@@ -177,7 +177,6 @@ const IntroToSignup = () => {
             </div>
           </div>
         </section>
-
         <section className="relative text-white pt-8">
           <h3 className="font-bold tracking-widest md:text-xl text-lg pb-4 text-red-100">
             Frequently Asked Questions
@@ -197,8 +196,10 @@ const IntroToSignup = () => {
             // networkError={error}
           />
         </div>
+        <div className="pt-20">
+          <Footer />
+        </div>
       </section>
-      <Footer />
     </>
   );
 };
