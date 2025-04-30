@@ -1,15 +1,22 @@
-import React, { useContext, useLayoutEffect, useRef, useState } from "react";
+import React, {
+  useContext,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 import { ItemContext } from "../context/ItemContext";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { imageURL, PREFIX } from "../Request";
-import { ratings } from "../utils/helper";
+import { ratings, truncateString } from "../utils/helper";
 import { MoveLeft, MoveRight } from "../components/ArrowMove";
 import Movie from "../components/Movie";
 import { doc, onSnapshot } from "firebase/firestore";
 import { db } from "../config/firebase";
 import { UserAuth } from "../context/AuthContent";
 import { IoIosAddCircleOutline, IoIosRemoveCircle } from "react-icons/io";
+import ReactPlayer from "react-player/lazy";
 
 const Play = () => {
   const [movieDetails, setMovieDetails] = useState();
@@ -18,19 +25,24 @@ const Play = () => {
   const [watchedShow, setWatchShow] = useState(false);
   const [like, setLike] = useState();
   const [movies, setMovies] = useState();
-  const [yId, setYId] = useState("");
-  const [showTag, setShowTag] = useState(true);
+  // const [yId, setYId] = useState("");g
   const [watchedMovies, setWatchedMovies] = useState([]);
+  // const [isMobile, setIsMobile] = useState(false);
 
   const navigate = useNavigate();
   const key = import.meta.env.VITE_TMDB_KEY;
   const { id, img } = useParams();
   const { user } = UserAuth();
+  const recommendationsRef = useRef(null);
   const { saveShow, deleteShow, deleteWatchedShow, saveWatchedShow } =
     useContext(ItemContext);
+  const MOBILE_BREAKPOINT = 1024;
 
+  // useLayoutEffect(() => {
+  //   if (id) setId(id);
+  // });
   //   console.log(img, id);
-  useLayoutEffect(() => {
+  useEffect(() => {
     window.scrollTo(0, 0);
     if (!id) {
       navigate("/");
@@ -43,15 +55,15 @@ const Play = () => {
           setTrailerVideos(resp.data.results);
         })
         .catch((err) => console.error(err));
+    }
 
-      if (trailerVideos === "") {
-        axios
-          .get(`${PREFIX}tv/${id}/videos?api_key=${key}&language=en-US`)
-          .then((resp) => {
-            setTrailerVideos(resp.data.results);
-          })
-          .catch((err) => console.error(err));
-      }
+    if (trailerVideos === "") {
+      axios
+        .get(`${PREFIX}tv/${id}/videos?api_key=${key}&language=en-US`)
+        .then((resp) => {
+          setTrailerVideos(resp.data.results);
+        })
+        .catch((err) => console.error(err));
 
       axios
         .get(`${PREFIX}movie/${id}?api_key=${key}`)
@@ -77,41 +89,30 @@ const Play = () => {
         )[0];
         if (watchedData !== undefined) setWatchShow(true);
       });
-
-      setYId(trailerVideos[0]?.key);
     }
-
-    setTimeout(() => {
-      setShowTag(false);
-    }, 40000);
   }, [id]);
 
-  // console.log(`bg-[url('${imageURL.url}${movieDetails.backdrop_path}')]`);
-  // console.log(movieDetails, trailerVideos, recommendations);
   return (
     <div className=" pt-18 h-full mx-auto border-2">
       {trailerVideos.length > 0 ? (
         <div className="w-full h-[40vh] bg-[#ccc] ">
-          <iframe
+          <ReactPlayer
+            muted={true}
+            url={trailerVideos.map(
+              (video) => "https://www.youtube.com/watch/" + video.key
+            )}
+            playing={true}
+            controls={true}
             width="100%"
             height="100%"
-            frameBorder="0"
-            allow="autoplay web-share accelerometer clipboard-write web-share encrypted-media gyroscope picture-in-picture fullscreen"
-            // allow="autoplay; fullscreen"
-            allowFullScreen
-            src={`https://www.youtube.com/embed/${yId}?autoplay=1&mute=0&vq=medium`}
-          ></iframe>
-
-          {showTag && (
-            <p className="text-[8px] text-[#ccc] w-full text-center ">
-              Kindly wait for trailer to load
-            </p>
-          )}
+            volume={1}
+            pip={true}
+          />
         </div>
       ) : (
         <div className="w-[80%] h-[40vh] mx-auto ">
           <img
-            src={`${imageURL.url}${img}`}
+            src={`${imageURL.lgUrl}${img}`}
             alt=""
             className="w-full h-full rounded-t-lg object-cover"
             loading="lazy"
@@ -284,7 +285,7 @@ const Play = () => {
                   )}
                 </div>
 
-                {trailerVideos.length > 1 && (
+                {/* {trailerVideos.length > 1 && (
                   <section className="py-10 px-1">
                     <div className="flex flex-wrap bg-[#000000ac] w-full">
                       <h1 className="text-white text-2xl font-semibold my-10 border-l-4 border-red-800 pl-3 ">
@@ -310,6 +311,7 @@ const Play = () => {
                                 onClick={() => {
                                   setYId(trailerMovie.key);
                                   window.location.reload(true);
+                                  window.scrollTo(0, 0);
                                   //   console.log(trailerMovie.key);
                                 }}
                               >
@@ -322,7 +324,7 @@ const Play = () => {
                       </div>
                     </div>
                   </section>
-                )}
+                )} */}
 
                 {recommendations.length > 0 && (
                   <section>
@@ -331,11 +333,17 @@ const Play = () => {
                         <h1 className="text-white text-4xl font-semibold my-10 border-l-4 border-red-800 pl-3 ">
                           {" "}
                           Watch After{" "}
-                          {movieDetails.title ||
-                            movieDetails.name ||
-                            movieDetails.original_title}
+                          {truncateString(
+                            movieDetails.title ||
+                              movieDetails.name ||
+                              movieDetails.original_title,
+                            80
+                          )}
                         </h1>
-                        <div className="grid grid-cols-2 gap-4 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+                        <div
+                          className="grid grid-cols-2 gap-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4"
+                          ref={recommendationsRef}
+                        >
                           {recommendations.map(
                             (recMovie) =>
                               recMovie.backdrop_path && (
@@ -343,14 +351,20 @@ const Play = () => {
                                   key={recMovie.title}
                                   className="max-w-sm show mb-4 relative cursor-pointer"
                                 >
-                                  <img
-                                    src={imageURL.url + recMovie.backdrop_path}
-                                    alt=""
-                                    className="cursor-pointer"
+                                  <Movie
+                                    item={recMovie}
+                                    onClick={() => {
+                                      navigate(
+                                        `/play/${
+                                          recMovie.id
+                                        }/${recMovie.backdrop_path.slice(1)}`
+                                      );
+                                      window.location.reload(true);
+                                    }}
                                   />
-                                  <div className="absolute top-0 left-0 w-full h-full hover:bg-black/80 opacity-0 hover:opacity-100 text-white">
-                                    <p
-                                      className="whitespace-normal text-sm md:text-base font-bold flex justify-center items-center h-full text-center py-2"
+                                  <div className="whitespace-normal text-white text-sm flex gap-3 h-[55px] px-1  pt-2 md:hidden ">
+                                    {/* <p
+                                      className="w-full h-[50px] "
                                       onClick={() => {
                                         navigate(
                                           `/play/${
@@ -360,9 +374,11 @@ const Play = () => {
                                         window.location.reload(true);
                                       }}
                                     >
-                                      {recMovie?.title}
-                                    </p>
+                                      {truncateString(recMovie?.title, 45)}
+                                    </p> */}
                                   </div>
+
+                                  <div></div>
                                 </div>
                               )
                           )}

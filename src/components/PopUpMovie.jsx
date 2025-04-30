@@ -45,9 +45,9 @@ const PopUpMovie = ({ item, setItem }) => {
   const ratingStars = ratings(item.vote_average);
 
   return (
-    <div className="fixed top-24 w-11/12 left-10 mx-auto h-[80%] bg-dark text-white z-20 bg-black/90 rounded-lg overflow-auto scroll-black">
+    <div className="fixed top-24 w-11/12 left-1/20 mx-auto h-[80%] bg-dark text-white z-20 bg-black/90 rounded-lg overflow-auto scroll-black">
       <LiaTimesCircleSolid
-        className="text-4xl text- absolute right-2 top-1 cursor-pointer z-20 hover:bg-neutral-600 rounded-lg"
+        className="text-4xl  absolute right-2 top-1 cursor-pointer z-20 hover:bg-neutral-600 rounded-lg"
         onClick={() => setItem({})}
       />
 
