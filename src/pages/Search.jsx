@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useLayoutEffect, useState } from "react";
 import { IoSearchOutline } from "react-icons/io5";
 import requests, { imageURL } from "../Request";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
@@ -11,6 +11,10 @@ const Search = () => {
   const [loading, setLoading] = useState("");
   const [searchResponse, setSearchResponse] = useState([]);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  });
 
   const submitForm = (e) => {
     e.preventDefault;
@@ -38,7 +42,7 @@ const Search = () => {
         setSearchResponse(["an error occurred"]);
       });
   };
-  console.log(searchResponse);
+  // console.log(searchResponse);
 
   return (
     <div className="pt-24">
@@ -57,6 +61,7 @@ const Search = () => {
           placeholder="search movies"
           className="bg-[#2c2c2c]/10  px-2 py-[8px] flex-2 w-full rounded-s-lg focus:border-none focus:outline-none text-white"
           onChange={(e) => setSearchValue(e.target.value)}
+          value={searchValue}
         />
         <button
           type="submit"

@@ -15,16 +15,6 @@ const SavedShows = () => {
   const sliderRef = useRef();
   const navigate = useNavigate();
 
-  // const slideLeft = (sliderRef) => {
-  //   sliderRef.current.scrollLeft = sliderRef.current.scrollLeft - 500;
-  // };
-
-  // const slideRight = (sliderRef) => {
-  //   sliderRef.current.scrollLeft = sliderRef.current.scrollLeft + 500;
-  // };
-
-  // console.log(movies);
-
   useEffect(() => {
     onSnapshot(doc(db, "users", `${user?.email}`), (doc) => {
       setMovies(doc.data()?.savedShows);
@@ -44,21 +34,21 @@ const SavedShows = () => {
           {movies?.map((item, id) => (
             <div
               key={item.id}
-              className="w-[160px] sm:w-[200px] md:w-[240px] lg:w-[280px] inline-block cursor-pointer relative p-2"
+              className="w-[160px] sm:w-[200px] md:w-[240px] lg:w-[280px] inline-block cursor-pointer relative px-2 py-4"
             >
               <img
                 src={`https://image.tmdb.org/t/p/w500/${item?.img}`}
                 alt={item?.title}
                 className="w-full h-auto block"
               />
-              <div
-                className="absolute top-0 left-0 w-full h-full hover:bg-black/80 opacity-0 hover:opacity-100 text-white"
-                onClick={() => {
-                  navigate(`/play/${item.id}/${item.img.slice(1)}`);
-                  window.location.reload(true);
-                }}
-              >
-                <p className="whitespace-normal text-xs md:text-sm font-bold flex justify-center items-center h-full text-center">
+              <div className="absolute top-0 left-0 w-full h-full hover:bg-black/80 opacity-0 hover:opacity-100 text-white">
+                <p
+                  className="whitespace-normal text-xs md:text-sm font-bold flex justify-center items-center text-center h-3/4 absolute bottom-0 w-full "
+                  onClick={() => {
+                    navigate(`/play/${item.id}/${item.img.slice(1)}`);
+                    window.location.reload(true);
+                  }}
+                >
                   {item?.title}
                 </p>
                 <p
@@ -72,11 +62,6 @@ const SavedShows = () => {
           ))}
         </div>
         <MoveRight sliderRef={sliderRef} />
-        {/* <MdChevronRight
-          onClick={() => slideRight(sliderRef)}
-          className="bg-white right-0 rounded-full opacity-50 hover:opacity-100 cursor-pointer z-10 hidden group-hover:block"
-          size={40}
-        /> */}
       </div>
     </>
   );
