@@ -83,7 +83,7 @@ const Navbar = () => {
                   <Link to="/account">
                     <button className="text-white cursor-pointer rounded-full bg-gradient-to-bl to-gray-800 p-2 hover:to-yellow-300 ">
                       <img
-                        src="./avater-blue.svg"
+                        src="./avatar-svg.svg"
                         alt=""
                         className=" w-10  sm:w-8"
                       />
