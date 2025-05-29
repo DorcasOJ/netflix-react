@@ -19,4 +19,4 @@ FUNCTIONS
 - Account page (user details)
 
 # LIVE LINK 
-[live](https://netflix-clone-e75b8.web.app)
+[live](https://cute-mooncake-861675.netlify.app/)
