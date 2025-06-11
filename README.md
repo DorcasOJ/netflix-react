@@ -5,6 +5,7 @@ A web app to moovies and shows
 BUILT WITH REACT AND TAILWIND
 
 FUNCTIONS
+
 - Welcome page
 - Registration page -- choose subscription
 - Registration page -- register card details
@@ -18,5 +19,7 @@ FUNCTIONS
 - Favourite page (view saved/favourite show)
 - Account page (user details)
 
-# LIVE LINK 
-[live](https://cute-mooncake-861675.netlify.app/)
+# LIVE LINK
+
+[live main](https://cute-mooncake-861675.netlify.app)
+[live](https://netflix-clone-e75b8.web.app)

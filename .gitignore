@@ -28,3 +28,6 @@ build
 .github/workflows
 .firebaserc
 firebase.json
+
+.firebase/hosting.ZGlzdA.cache
+google1e03ab86fc2b5a1e.html

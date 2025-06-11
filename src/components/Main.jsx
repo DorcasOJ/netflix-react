@@ -51,7 +51,7 @@ const Main = () => {
             className="border border-gray-300 text-white rounded py-2 px-5 ml-4 flex items-center justify-center gap-2 cursor-pointer hover:text-red-600 hover:bg-white "
             onClick={() => {
               saveShow(user, movie);
-              navigate("/account");
+              navigate("/favShows");
             }}
           >
             {/* {like ? <FaHeart /> : <FaRegHeart />} */}
