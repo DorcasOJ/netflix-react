@@ -16,6 +16,7 @@ import ProtectedRoute, {
   ProtectedHomeRoute,
 } from "./components/ProtectedRoute";
 import { Fragment } from "react";
+import AnalysisTracker from "./components/AnalysisTracker";
 // import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
   return (
     <>
       <Fragment>
+        <AnalysisTracker />
         <Navbar />
         <Routes>
           <Route path="*" element={<ErrorPage />} />
